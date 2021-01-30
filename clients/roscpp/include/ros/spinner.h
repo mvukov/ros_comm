@@ -29,7 +29,7 @@
 #define ROSCPP_SPINNER_H
 
 #include "ros/types.h"
-#include "common.h"
+#include "ros/common.h"
 
 #include <boost/shared_ptr.hpp>
 

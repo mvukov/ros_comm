@@ -30,7 +30,7 @@
 
 #include "forwards.h"
 #include "poll_set.h"
-#include "common.h"
+#include "ros/common.h"
 #include "publisher.h"
 #include <ros/time.h>
 #include "ros/subscription_callback_helper.h"

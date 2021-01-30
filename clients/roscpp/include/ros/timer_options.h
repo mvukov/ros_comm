@@ -28,7 +28,7 @@
 #ifndef ROSCPP_TIMER_OPTIONS_H
 #define ROSCPP_TIMER_OPTIONS_H
 
-#include "common.h"
+#include "ros/common.h"
 #include "ros/forwards.h"
 
 namespace ros

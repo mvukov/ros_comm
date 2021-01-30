@@ -30,7 +30,7 @@
 
 #include "forwards.h"
 #include "poll_set.h"
-#include "common.h"
+#include "ros/common.h"
 
 #include <boost/signals2.hpp>
 

@@ -30,7 +30,7 @@
 
 #include "ros/forwards.h"
 #include "ros/message_traits.h"
-#include "common.h"
+#include "ros/common.h"
 
 namespace ros
 {

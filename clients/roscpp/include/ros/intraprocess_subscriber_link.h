@@ -28,7 +28,7 @@
 #ifndef ROSCPP_INTRAPROCESS_SUBSCRIBER_LINK_H
 #define ROSCPP_INTRAPROCESS_SUBSCRIBER_LINK_H
 #include "subscriber_link.h"
-#include "common.h"
+#include "ros/common.h"
 
 #include <boost/thread/recursive_mutex.hpp>
 

@@ -29,7 +29,7 @@
 #define ROSCPP_NETWORK_H
 
 #include "forwards.h"
-#include "common.h"
+#include "ros/common.h"
 
 namespace ros
 {

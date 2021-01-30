@@ -42,7 +42,7 @@
 *****************************************************************************/
 
 #include <string>
-#include "common.h"
+#include "ros/common.h"
 
 #ifdef WIN32
 	#include <winsock2.h> // For struct timeval

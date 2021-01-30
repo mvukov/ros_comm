@@ -27,7 +27,7 @@
 
 #ifndef ROSCPP_TRANSPORT_SUBSCRIBER_LINK_H
 #define ROSCPP_TRANSPORT_SUBSCRIBER_LINK_H
-#include "common.h"
+#include "ros/common.h"
 #include "subscriber_link.h"
 
 #include <boost/signals2/connection.hpp>

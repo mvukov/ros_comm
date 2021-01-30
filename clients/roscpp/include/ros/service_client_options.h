@@ -29,7 +29,7 @@
 #define ROSCPP_SERVICE_CLIENT_OPTIONS_H
 
 #include "ros/forwards.h"
-#include "common.h"
+#include "ros/common.h"
 #include "ros/service_traits.h"
 
 namespace ros

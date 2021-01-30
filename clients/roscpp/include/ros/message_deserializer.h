@@ -29,7 +29,7 @@
 #define ROSCPP_MESSAGE_DESERIALIZER_H
 
 #include "forwards.h"
-#include "common.h"
+#include "ros/common.h"
 
 #include <ros/serialized_message.h>
 

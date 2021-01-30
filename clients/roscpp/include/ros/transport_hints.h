@@ -28,7 +28,7 @@
 #ifndef ROSCPP_TRANSPORT_HINTS_H
 #define ROSCPP_TRANSPORT_HINTS_H
 
-#include "common.h"
+#include "ros/common.h"
 #include "ros/forwards.h"
 
 #include <boost/lexical_cast.hpp>

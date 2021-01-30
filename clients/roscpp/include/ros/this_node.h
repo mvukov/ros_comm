@@ -28,7 +28,7 @@
 #ifndef ROSCPP_THIS_NODE_H
 #define ROSCPP_THIS_NODE_H
 
-#include "common.h"
+#include "ros/common.h"
 #include "forwards.h"
 
 namespace ros

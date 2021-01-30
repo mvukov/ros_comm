@@ -29,7 +29,7 @@
 #define ROSCPP_SERVICE_HANDLE_H
 
 #include "ros/forwards.h"
-#include "common.h"
+#include "ros/common.h"
 
 namespace ros
 {

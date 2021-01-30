@@ -45,7 +45,7 @@
 #include "ros/wall_timer_options.h"
 #include "ros/spinner.h"
 #include "ros/init.h"
-#include "common.h"
+#include "ros/common.h"
 
 #include <boost/bind.hpp>
 

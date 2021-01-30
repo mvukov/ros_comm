@@ -32,7 +32,7 @@
 #include "ros/service_callback_helper.h"
 #include "ros/service_traits.h"
 #include "ros/message_traits.h"
-#include "common.h"
+#include "ros/common.h"
 
 namespace ros
 {

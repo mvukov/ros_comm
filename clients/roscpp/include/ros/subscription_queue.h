@@ -29,7 +29,7 @@
 #define ROSCPP_SUBSCRIPTION_QUEUE_H
 
 #include "forwards.h"
-#include "common.h"
+#include "ros/common.h"
 #include "ros/message_event.h"
 #include "callback_queue_interface.h"
 

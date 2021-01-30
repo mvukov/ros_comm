@@ -27,7 +27,7 @@
 
 #include "forwards.h"
 #include "connection.h"
-#include "common.h"
+#include "ros/common.h"
 
 #include <boost/thread/mutex.hpp>
 #include <boost/signals2/connection.hpp>

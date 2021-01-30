@@ -29,7 +29,7 @@
 #define ROSCPP_SUBSCRIBE_OPTIONS_H
 
 #include "ros/forwards.h"
-#include "common.h"
+#include "ros/common.h"
 #include "ros/transport_hints.h"
 #include "ros/message_traits.h"
 #include "subscription_callback_helper.h"

@@ -36,7 +36,7 @@
 #define ROSCPP_CONNECTION_H
 
 #include "ros/header.h"
-#include "common.h"
+#include "ros/common.h"
 
 #include <boost/signals2.hpp>
 

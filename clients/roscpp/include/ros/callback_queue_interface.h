@@ -36,7 +36,7 @@
 #define ROSCPP_CALLBACK_QUEUE_INTERFACE_H
 
 #include <boost/shared_ptr.hpp>
-#include "common.h"
+#include "ros/common.h"
 #include "ros/types.h"
 
 namespace ros

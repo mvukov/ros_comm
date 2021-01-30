@@ -29,7 +29,7 @@
 #define ROSCPP_SERVICE_PUBLICATION_H
 
 #include "ros/service_callback_helper.h"
-#include "common.h"
+#include "ros/common.h"
 #include "xmlrpcpp/XmlRpc.h"
 
 #include <boost/thread/mutex.hpp>

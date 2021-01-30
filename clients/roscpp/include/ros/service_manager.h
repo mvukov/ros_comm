@@ -29,7 +29,7 @@
 #define ROSCPP_SERVICE_MANAGER_H
 
 #include "forwards.h"
-#include "common.h"
+#include "ros/common.h"
 #include "advertise_service_options.h"
 #include "service_client_options.h"
 

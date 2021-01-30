@@ -30,7 +30,7 @@
 
 #include "forwards.h"
 #include "xmlrpcpp/XmlRpcValue.h"
-#include "common.h"
+#include "ros/common.h"
 
 namespace ros
 {

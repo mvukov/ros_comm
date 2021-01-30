@@ -37,7 +37,7 @@
 
 #include "ros/forwards.h"
 #include "ros/spinner.h"
-#include "common.h"
+#include "ros/common.h"
 
 namespace ros
 {

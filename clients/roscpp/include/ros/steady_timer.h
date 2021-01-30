@@ -28,7 +28,7 @@
 #ifndef ROSCPP_STEADY_TIMER_H
 #define ROSCPP_STEADY_TIMER_H
 
-#include "common.h"
+#include "ros/common.h"
 #include "forwards.h"
 #include "steady_timer_options.h"
 

@@ -28,7 +28,7 @@
 #ifndef ROSCPP_SUBSCRIBER_HANDLE_H
 #define ROSCPP_SUBSCRIBER_HANDLE_H
 
-#include "common.h"
+#include "ros/common.h"
 #include "ros/forwards.h"
 #include "ros/subscription_callback_helper.h"
 

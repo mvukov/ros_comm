@@ -31,7 +31,7 @@
 #include "ros/common.h"
 #include "ros/transport_hints.h"
 #include "ros/header.h"
-#include "common.h"
+#include "ros/common.h"
 #include <boost/thread/mutex.hpp>
 #include <boost/shared_array.hpp>
 #include <boost/weak_ptr.hpp>

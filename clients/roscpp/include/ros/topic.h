@@ -35,7 +35,7 @@
 #ifndef ROSCPP_TOPIC_H
 #define ROSCPP_TOPIC_H
 
-#include "common.h"
+#include "ros/common.h"
 #include "node_handle.h"
 #include <boost/shared_ptr.hpp>
 

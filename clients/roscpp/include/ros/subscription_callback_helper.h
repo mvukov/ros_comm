@@ -30,7 +30,7 @@
 
 #include <typeinfo>
 
-#include "common.h"
+#include "ros/common.h"
 #include "ros/forwards.h"
 #include "ros/parameter_adapter.h"
 #include "ros/message_traits.h"

@@ -29,7 +29,7 @@
 #define ROSCPP_TOPIC_MANAGER_H
 
 #include "forwards.h"
-#include "common.h"
+#include "ros/common.h"
 #include "ros/serialization.h"
 #include "rosout_appender.h"
 

@@ -37,7 +37,7 @@
 
 #include <vector>
 #include "io.h"
-#include "common.h"
+#include "ros/common.h"
 #include <boost/shared_ptr.hpp>
 #include <boost/function.hpp>
 #include <boost/thread/mutex.hpp>

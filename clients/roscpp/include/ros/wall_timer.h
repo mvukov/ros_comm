@@ -28,7 +28,7 @@
 #ifndef ROSCPP_WALL_TIMER_H
 #define ROSCPP_WALL_TIMER_H
 
-#include "common.h"
+#include "ros/common.h"
 #include "forwards.h"
 #include "wall_timer_options.h"
 

@@ -29,7 +29,7 @@
 #define ROSCPP_PARAM_H
 
 #include "forwards.h"
-#include "common.h"
+#include "ros/common.h"
 #include "xmlrpcpp/XmlRpcValue.h"
 
 #include <vector>
