@@ -30,6 +30,8 @@
 #include "rosbag/query.h"
 #include "rosbag/view.h"
 
+#include "rosbag/no_encryptor.h"
+
 #if defined(_MSC_VER)
   #include <stdint.h> // only on v2010 and later -> is this enough for msvc and linux?
 #else
@@ -39,6 +41,7 @@
 #include <assert.h>
 #include <iomanip>
 
+#include "boost/bind.hpp"
 #include "console_bridge/console.h"
 
 using std::map;
@@ -53,12 +56,12 @@ using ros::Time;
 
 namespace rosbag {
 
-Bag::Bag() : encryptor_loader_("rosbag_storage", "rosbag::EncryptorBase")
+Bag::Bag() //: encryptor_loader_("rosbag_storage", "rosbag::EncryptorBase")
 {
     init();
 }
 
-Bag::Bag(string const& filename, uint32_t mode) : encryptor_loader_("rosbag_storage", "rosbag::EncryptorBase")
+Bag::Bag(string const& filename, uint32_t mode) //: encryptor_loader_("rosbag_storage", "rosbag::EncryptorBase")
 {
     init();
     open(filename, mode);
@@ -66,7 +69,8 @@ Bag::Bag(string const& filename, uint32_t mode) : encryptor_loader_("rosbag_stor
 
 #ifndef BOOST_NO_CXX11_RVALUE_REFERENCES
 
-Bag::Bag(Bag&& other) : encryptor_loader_("rosbag_storage", "rosbag::EncryptorBase") {
+Bag::Bag(Bag&& other) //: encryptor_loader_("rosbag_storage", "rosbag::EncryptorBase") {
+{
     init();
     swap(other);
 }
@@ -218,7 +222,7 @@ void Bag::setEncryptorPlugin(std::string const& plugin_name, std::string const& 
     if (!chunks_.empty()) {
         throw BagException("Cannot set encryption plugin after chunks are written");
     }
-    encryptor_ = encryptor_loader_.createInstance(plugin_name);
+    encryptor_ = boost::shared_ptr<rosbag::EncryptorBase>(new NoEncryptor);  //encryptor_loader_.createInstance(plugin_name);
     encryptor_->initialize(*this, plugin_param);
 }
 

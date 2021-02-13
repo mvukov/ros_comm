@@ -62,7 +62,7 @@
 #include <boost/format.hpp>
 #include <boost/iterator/iterator_facade.hpp>
 
-#include <pluginlib/class_loader.hpp>
+//#include <pluginlib/class_loader.hpp>
 
 #include "console_bridge/console.h"
 #if defined logDebug
@@ -352,7 +352,7 @@ private:
     mutable uint64_t decompressed_chunk_;      //!< position of decompressed chunk
 
     // Encryptor plugin loader
-    pluginlib::ClassLoader<rosbag::EncryptorBase> encryptor_loader_;
+    //pluginlib::ClassLoader<rosbag::EncryptorBase> encryptor_loader_;
     // Active encryptor
     boost::shared_ptr<rosbag::EncryptorBase> encryptor_;
 };

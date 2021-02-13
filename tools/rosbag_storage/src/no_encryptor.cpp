@@ -35,9 +35,9 @@
 #include "rosbag/bag.h"
 #include "rosbag/no_encryptor.h"
 
-#include <pluginlib/class_list_macros.hpp>
+//#include <pluginlib/class_list_macros.hpp>
 
-PLUGINLIB_EXPORT_CLASS(rosbag::NoEncryptor, rosbag::EncryptorBase)
+//PLUGINLIB_EXPORT_CLASS(rosbag::NoEncryptor, rosbag::EncryptorBase)
 
 namespace rosbag
 {
