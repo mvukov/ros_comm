@@ -62,7 +62,7 @@ def rosmaster_main(argv=sys.argv, stdout=sys.stdout, env=os.environ):
     parser.add_option("--core",
                       dest="core", action="store_true", default=False,
                       help="run as core")
-    parser.add_option("-p", "--port", 
+    parser.add_option("-p", "--port",
                       dest="port", default=0,
                       help="override port", metavar="PORT")
     parser.add_option("-w", "--numworkers",
@@ -81,8 +81,8 @@ def rosmaster_main(argv=sys.argv, stdout=sys.stdout, env=os.environ):
     for arg in args:
         if not arg.startswith('__log:='):
             parser.error("unrecognized arg: %s"%arg)
-    configure_logging()   
-    
+    configure_logging()
+
     port = rosmaster.master.DEFAULT_MASTER_PORT
     if options.port:
         port = int(options.port)
@@ -136,4 +136,4 @@ WARNING ACHTUNG WARNING ACHTUNG WARNING
         master.stop()
 
 if __name__ == "__main__":
-    main()
+    rosmaster_main()
