@@ -78,19 +78,19 @@ def parse_http_host_and_port(url):
     port due to the fact that Python only provides easy accessors in
     Python 2.5 and later. Validation checks that the protocol and host
     are set.
-    
+
     :param url: URL to parse, ``str``
     :returns: hostname and port number in URL or 80 (default), ``(str, int)``
     :raises: :exc:`ValueError` If the url does not validate
     """
     if not url:
-        raise ValueError('not a valid URL')        
+        raise ValueError('not a valid URL')
     p = urlparse.urlparse(url)
     if not p.scheme or not p.hostname:
         raise ValueError('not a valid URL')
     port = p.port if p.port else 80
     return p.hostname, port
-    
+
 def _is_unix_like_platform():
     """
     :returns: true if the platform conforms to UNIX/POSIX-style APIs
@@ -172,7 +172,7 @@ def is_local_address(hostname):
     if ([ip for ip in reverse_ips if (ip.startswith('127.') or ip == '::1')] != []) or (set(reverse_ips) & set(local_addresses) != set()):
         return True
     return False
-    
+
 def get_local_address():
     """
     :returns: default local IP address (e.g. eth0). May be overridden by ROS_IP/ROS_HOSTNAME/__ip/__hostname, ``str``
@@ -209,19 +209,16 @@ def get_local_addresses():
         # unix-only branch
         v4addrs = []
         v6addrs = []
-        import netifaces
-        for iface in netifaces.interfaces():
-            try:
-                ifaddrs = netifaces.ifaddresses(iface)
-            except ValueError:
-                # even if interfaces() returns an interface name
-                # ifaddresses() might raise a ValueError
-                # https://bugs.launchpad.net/ubuntu/+source/netifaces/+bug/753009
-                continue
-            if socket.AF_INET in ifaddrs:
-                v4addrs.extend([addr['addr'] for addr in ifaddrs[socket.AF_INET]])
-            if socket.AF_INET6 in ifaddrs:
-                v6addrs.extend([addr['addr'] for addr in ifaddrs[socket.AF_INET6]])
+        import ifaddr
+        for adapter in ifaddr.get_adapters():
+            for ip_struct in adapter.ips:
+                ip = ip_struct.ip
+                if isinstance(ip, str):
+                    v4addrs.append(ip)
+                elif isinstance(ip, tuple):
+                    v6addrs.append(ip[0])
+                else:
+                    raise TypeError('IP must be a string or a tuple!')
         if use_ipv6():
             local_addrs = v6addrs + v4addrs
         else:
@@ -285,7 +282,7 @@ def create_local_xmlrpc_uri(port):
     logic of checking ROS environment variables, the known hostname,
     and local interface IP addresses to determine the best possible
     URI.
-    
+
     :param port: port that server is running on, ``int``
     :returns: XMLRPC URI, ``str``
     """
@@ -309,7 +306,7 @@ def decode_ros_handshake_header(header_str):
     header is a list of string key=value pairs, each prefixed by a
     4-byte length field. It is preceded by a 4-byte length field for
     the entire header.
-    
+
     :param header_str: encoded header string. May contain extra data at the end, ``str``
     :returns: key value pairs encoded in \a header_str, ``{str: str}``
     """
@@ -329,11 +326,11 @@ def decode_ros_handshake_header(header_str):
         if start > size:
             raise ROSHandshakeException("Invalid line length in handshake header: %s"%size)
         line = header_str[start-field_size:start]
-        
+
         #python3 compatibility
         if python3 == 1:
             line = line.decode()
-        
+
         idx = line.find("=")
         if idx < 0:
             raise ROSHandshakeException("Invalid line in handshake header: [%s]"%line)
@@ -341,11 +338,11 @@ def decode_ros_handshake_header(header_str):
         value = line[idx+1:]
         d[key.strip()] = value
     return d
-    
+
 def read_ros_handshake_header(sock, b, buff_size):
     """
     Read in tcpros header off the socket \a sock using buffer \a b.
-    
+
     :param sock: socket must be in blocking mode, ``socket``
     :param b: buffer to use, ``StringIO`` for Python2, ``BytesIO`` for Python 3
     :param buff_size: incoming buffer size to use, ``int``
@@ -366,14 +363,14 @@ def read_ros_handshake_header(sock, b, buff_size):
             (size,) = struct.unpack('<I', bval[0:4])
             if btell - 4 >= size:
                 header_str = bval
-                    
+
                 # memmove the remnants of the buffer back to the start
                 leftovers = bval[size+4:]
                 b.truncate(len(leftovers))
                 b.seek(0)
                 b.write(leftovers)
                 header_recvd = True
-                    
+
     # process the header
     return decode_ros_handshake_header(bval)
 
@@ -390,7 +387,7 @@ def encode_ros_handshake_header(header):
     :returns: header encoded as byte string, ``bytes``
     """
     str_cls = str if python3 else unicode
-    
+
     # encode all unicode keys in the header. Ideally, the type of these would be specified by the api
     encoded_header = {}
     for k, v in header.items():
@@ -402,9 +399,9 @@ def encode_ros_handshake_header(header):
 
     fields = [k + b"=" + v for k, v in sorted(encoded_header.items())]
     s = b''.join([struct.pack('<I', len(f)) + f for f in fields])
-    
+
     return struct.pack('<I', len(s)) + s
-                                        
+
 def write_ros_handshake_header(sock, header):
     """
     Write ROS handshake header header to socket sock
@@ -416,4 +413,4 @@ def write_ros_handshake_header(sock, header):
     s = encode_ros_handshake_header(header)
     sock.sendall(s)
     return len(s) #STATS
-    
+
