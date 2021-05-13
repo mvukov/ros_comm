@@ -47,6 +47,11 @@ import yaml
 import rospkg
 from rospkg.environment import ROS_LOG_DIR
 
+try:
+    from . import ros_logging_config
+except ImportError:
+    ros_logging_config = None
+
 class LoggingException(Exception): pass
 
 class RospyLogger(logging.getLoggerClass()):
@@ -118,7 +123,7 @@ def configure_logging(logname, level=logging.INFO, filename=None, env=None):
 
     logname = logname or 'unknown'
     log_dir = rospkg.get_log_dir(env=env)
-    
+
     # if filename is not explicitly provided, generate one using logname
     if not filename:
         log_filename = os.path.join(log_dir, '%s-%s.log'%(logname, os.getpid()))
@@ -153,6 +158,8 @@ def configure_logging(logname, level=logging.INFO, filename=None, env=None):
                 sys.stderr.write("INFO: cannot create a symlink to latest log directory: %s\n" % e)
 
     config_file = os.environ.get('ROS_PYTHON_LOG_CONFIG_FILE')
+    if not config_file and ros_logging_config:
+        config_file = ros_logging_config.ROS_PYTHON_LOG_CONFIG_FILE
     if not config_file:
         # search for logging config file in ROS_HOME, ROS_ETC_DIR or relative
         # to the rosgraph package directory.
@@ -179,7 +186,7 @@ def configure_logging(logname, level=logging.INFO, filename=None, env=None):
         sys.stderr.write("WARNING: cannot load logging configuration file, logging is disabled\n")
         logging.getLogger(logname).setLevel(logging.CRITICAL)
         return log_filename
-    
+
     # pass in log_filename as argument to pylogging.conf
     os.environ['ROS_LOG_FILENAME'] = log_filename
     if config_file.endswith(('.yaml', '.yml')):
@@ -200,7 +207,7 @@ def makedirs_with_parent_perms(p):
     (existing) parent directory. This is useful for logging, where a
     root process sometimes has to log in the user's space.
     :param p: directory to create, ``str``
-    """    
+    """
     p = os.path.abspath(p)
     parent = os.path.dirname(p)
     # recurse upwards, checking to make sure we haven't reached the
@@ -215,7 +222,7 @@ def makedirs_with_parent_perms(p):
         if s.st_uid != s2.st_uid or s.st_gid != s2.st_gid:
             os.chown(p, s.st_uid, s.st_gid)
         if s.st_mode != s2.st_mode:
-            os.chmod(p, s.st_mode)    
+            os.chmod(p, s.st_mode)
 
 _logging_to_rospy_names = {
     'DEBUG': ('DEBUG', '\033[32m'),
